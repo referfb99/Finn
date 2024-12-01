@@ -13,31 +13,11 @@
                 status: params.get('status')
             };
         }
-
-       document.addEventListener("DOMContentLoaded", () => {
-    // Get the raw query string
-    const rawQuery = window.location.search;
-
-    // Fix and parse the query string manually
-    const cleanedQuery = rawQuery.replace(/\?/g, '&').substring(1); // Replace all '?' with '&' except the first
-    const params = new URLSearchParams(cleanedQuery);
-
-    // Extract parameters
-    const reference = params.get('reference');
-    const status = params.get('status');
-
-    // Display the transaction status and reference
-    if (status === "success" && reference) {
-        document.getElementById("transaction-reference").textContent = `Transaction Reference: ${reference}`;
-    } else {
-        document.getElementById("transaction-reference").textContent = "Transaction failed or reference not found.";
-    }
-
-    // Log for debugging
-    console.log("Cleaned Query:", cleanedQuery);
-    console.log("Reference:", reference);
-    console.log("Status:", status);
+document.addEventListener("DOMContentLoaded", () => {
+    const rawQuery = window.location.search; // Get the raw query string
+    document.getElementById("transaction-reference").textContent = `Raw Query: ${rawQuery}`;
 });
+       
     </script>
 </head>
 <body>
