@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Success</title>
+    <script>
+        // Function to get URL parameters
+        function getQueryParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                reference: params.get('reference'),
+                status: params.get('status')
+            };
+        }
+
+       document.addEventListener("DOMContentLoaded", () => {
+    const rawQuery = window.location.search; // Get the raw query string
+    document.getElementById("transaction-reference").textContent = `Raw Query: ${rawQuery}`;
+});
+    </script>
+</head>
+<body>
+    <h1>Payment Status</h1>
+    <p>Your transaction reference is: <strong id="transaction-reference">Loading...</strong></p>
+</body>
+</html>
