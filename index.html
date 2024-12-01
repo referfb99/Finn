@@ -5,19 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Payment Success</title>
     <script>
-        // Function to get URL parameters
+        // Function to get and process URL parameters
         function getQueryParams() {
             const params = new URLSearchParams(window.location.search);
+            const reference = params.get('reference');
+
+            // Extract only numbers from the reference
+            const numbersOnly = reference ? reference.match(/\d+/g)?.join('') : null;
+
+            // Store the numbers in localStorage
+            if (numbersOnly) {
+                localStorage.setItem('transactionNumbers', numbersOnly);
+            }
+
             return {
-                reference: params.get('reference'),
+                reference: numbersOnly,
                 status: params.get('status')
             };
         }
-document.addEventListener("DOMContentLoaded", () => {
-    const rawQuery = window.location.search; // Get the raw query string
-    document.getElementById("transaction-reference").textContent = `Raw Query: ${rawQuery}`;
-});
-       
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const queryParams = getQueryParams();
+            
+            document.getElementById("transaction-reference").textContent = 
+                queryParams.reference ? `Transaction Numbers: ${queryParams.reference}` 
+                                      : 'No valid reference found.';
+        });
     </script>
 </head>
 <body>
